@@ -34,7 +34,7 @@ services:
 The compose file features a couple of environment variables to configure it:
 - USER_DOMAIN: This is the domain name you want people to use to reach your map view.
 - SCHEME: The scheme that is used (http/https), default = https.
-- SAVE_NAME: The name for the symlink that is created internally, default = latest. This feature doesnt always play nice.
+- SAVE_NAME: The name for the symlink that is created internally, default = latest.sav. This feature doesnt always play nice.
 
 ## How does it work
 
