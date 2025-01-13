@@ -1,0 +1,35 @@
+name: satisfactory mapview pipeline
+
+# Triggers
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+
+#: Jobs to execute
+jobs:
+  ## Build Satisfactory mapping image
+  build-satisfactory-mapview:
+    runs-on: ubuntu-latest
+
+    steps:
+    ### Checkout repo
+    - uses: actions/checkout@v3
+      with: 
+        fetch-depth: 0
+    ### Generate version number
+    - name: Get version
+      id: get_version
+      uses: kingtechnl/githubactions/gitversion@main
+
+    ### Create and publish docker images to DockerHub
+    - name: Build and publish docker image
+      if: success()
+      uses: kingtechnl/githubactions/publish-docker@main
+      with:
+        registry_username: "${{ secrets.DOCKERHUB_USERNAME }}"
+        registry_password: "${{ secrets.DOCKERHUB_TOKEN }}"
+        image_name: "satisfactory-mapview"
+        tags: "${{ steps.get_version.outputs.version }};${{ steps.get_version.outputs.branchTag }};latest"
+        docker_file: "Dockerfile"
