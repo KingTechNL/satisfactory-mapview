@@ -27,7 +27,7 @@ services:
       - USER_DOMAIN=satisfactory.kingtech.nl
       - SCHEME=https
     volumes:
-      - '/root/satisfactory/saved/server:/var/www/html/saves:ro'
+      - '/root/satisfactory/saved/server:/var/www/html/saves'
 ```
 
 ### Environment variables:
